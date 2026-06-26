@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Treino 30 Dias | Paulo Victor - The Forge</title>
+  <style>
+    :root {
+      --bg: #05080d;
+      --card: rgba(12, 20, 32, .82);
+      --blue: #008cff;
+      --blue2: #00d4ff;
+      --text: #f4f7fb;
+      --muted: #a7b3c2;
+      --ok: #00ff9d;
+      --border: rgba(0, 174, 255, .35);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(0, 132, 255, .22), transparent 35%),
+        linear-gradient(135deg, #020409, #08111d 55%, #03060b);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .app {
+      width: min(1100px, 100%);
+      margin: auto;
+    }
+
+    header {
+      text-align: center;
+      padding: 28px 18px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(10, 18, 30, .92), rgba(5, 8, 13, .82));
+      box-shadow: 0 0 35px rgba(0, 140, 255, .18);
+    }
+
+    .brand {
+      font-size: clamp(36px, 8vw, 76px);
+      font-weight: 900;
+      letter-spacing: 4px;
+      line-height: .9;
+      color: var(--blue);
+      text-shadow: 0 0 22px rgba(0, 140, 255, .7);
+    }
+
+    h1 {
+      margin: 16px 0 8px;
+      font-size: clamp(22px, 4vw, 42px);
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .profile {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin: 22px 0;
+    }
+
+    .info {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .info small {
+      color: var(--blue2);
+      font-weight: 700;
+      display: block;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .info strong {
+      font-size: 18px;
+    }
+
+    .poster-button {
+      display: block;
+      margin: 24px auto;
+      max-width: 520px;
+      border: 2px solid var(--blue);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 140, 255, .35);
+      transition: transform .2s ease, box-shadow .2s ease;
+      text-decoration: none;
+      background: #000;
+    }
+
+    .poster-button:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 45px rgba(0, 212, 255, .55);
+    }
+
+    .poster-button img {
+      width: 100%;
+      display: block;
+    }
+
+    .poster-label {
+      padding: 14px;
+      text-align: center;
+      font-weight: 800;
+      color: white;
+      background: linear-gradient(90deg, #0047ff, #00b7ff);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .progress-box {
+      margin: 24px 0;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--card);
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .bar {
+      height: 16px;
+      background: rgba(255, 255, 255, .09);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--blue), var(--ok));
+      transition: width .25s ease;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .day {
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: 18px;
+      padding: 16px;
+      min-height: 170px;
+      position: relative;
+    }
+
+    .day.done {
+      border-color: rgba(0, 255, 157, .8);
+      box-shadow: 0 0 22px rgba(0, 255, 157, .18);
+    }
+
+    .day-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .day-number {
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--blue);
+    }
+
+    .day-title {
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: white;
+    }
+
+    .day ul {
+      padding-left: 17px;
+      margin: 0;
+      color: #dbe7f5;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      accent-color: var(--ok);
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      margin: 28px 0 10px;
+      font-size: 14px;
+    }
+
+    .reset {
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      .profile, .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 14px; }
+      .profile, .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div class="brand">THE FORGE</div>
+      <h1>Programa Híbrido 30 Dias</h1>
+      <p class="subtitle">Performance em Corrida / TAF — treino exclusivo para Paulo Victor Freitas Pereira</p>
+    </header>
+
+    <section class="profile">
+      <div class="info"><small>Atleta</small><strong>Paulo Victor</strong></div>
+      <div class="info"><small>Idade</small><strong>24 anos</strong></div>
+      <div class="info"><small>Altura</small><strong>1,66 m</strong></div>
+      <div class="info"><small>Peso</small><strong>65 kg</strong></div>
+      <div class="info"><small>Frequência</small><strong>5x semana</strong></div>
+    </section>
+
+    <a class="poster-button" href="assets/treino-30-dias-the-forge.png" target="_blank">
+      <img src="assets/treino-30-dias-the-forge.png" alt="Planilha visual do treino 30 dias The Forge">
+      <div class="poster-label">Abrir arte completa da planilha</div>
+    </a>
+
+    <section class="progress-box">
+      <div class="progress-top">
+        <strong>Evolução do atleta</strong>
+        <span id="count">0/30 treinos concluídos</span>
+        <button class="reset" onclick="resetProgress()">Resetar</button>
+      </div>
+      <div class="bar"><span id="bar"></span></div>
+    </section>
+
+    <section class="grid" id="trainingGrid"></section>
+
+    <footer>
+      Forjado pela disciplina. Provado pela superação. <br>
+      Treino desenvolvido por <strong>THE FORGE</strong>.
+    </footer>
+  </main>
+
+  <script>
+    const workouts = [
+      ["Corrida leve 1 km", "Agachamento 4x15", "Flexão 4x10", "Prancha 3x30s", "Alongamento"],
+      ["Caminhada rápida 10 min", "6 tiros de 100m", "Afundo 3x12", "Abdominal 3x20"],
+      ["Corrida contínua 1,5 km", "Agachamento com salto 3x12", "Burpees 3x8", "Prancha lateral"],
+      ["Treino funcional 5 voltas", "20 polichinelos", "15 flexões", "20 agachamentos", "200m corrida"],
+      ["Corrida regenerativa 2 km", "Mobilidade completa"],
+      ["Descanso", "Hidratação", "Sono de qualidade"],
+      ["Alongamentos leves", "Mobilidade", "Foco na recuperação"],
+      ["Corrida 2 km", "4 tiros de 200m", "Alongamento"],
+      ["Circuito 4 voltas", "15 burpees", "20 agachamentos", "15 flexões", "200m corrida"],
+      ["Corrida ritmo moderado 2,5 km", "Alongamento"],
+      ["8 tiros de 50m", "Pular corda 10 min", "Alongamento"],
+      ["Treino militar 5 voltas", "10 burpees", "20 agachamentos", "15 flexões", "300m corrida"],
+      ["Corrida leve 2 km", "Mobilidade", "Alongamento"],
+      ["Descanso", "Recuperação total"],
+      ["Teste corrida 2 km", "Cronometrar tempo", "Registrar resultado"],
+      ["6 tiros de 300m", "Descanso caminhando", "Alongamento"],
+      ["Corrida contínua 3 km", "Alongamento"],
+      ["Circuito 6 voltas", "20 agachamentos", "20 flexões", "30 abdominais", "10 burpees"],
+      ["Subidas: 10 tiros", "Alongamento"],
+      ["Corrida leve 3 km", "Alongamento"],
+      ["Descanso", "Sono e hidratação"],
+      ["Teste corrida 3 km", "Cronometrar tempo", "Registrar resultado"],
+      ["Sprint 10x100m", "Descanso caminhando", "Alongamento"],
+      ["Circuito HIIT", "30s trabalho / 30s descanso", "6 exercícios", "5 voltas"],
+      ["Corrida 4 km", "Alongamento"],
+      ["Explosão", "Saltos", "Agilidade", "Escada", "Cones"],
+      ["Treino militar 7 voltas", "10 burpees", "20 agachamentos", "20 flexões", "300m corrida"],
+      ["Corrida regenerativa 3 km", "Alongamento"],
+      ["Simulado TAF", "Corrida máxima", "Flexões máximas", "Abdominais máximos", "Prancha máxima"],
+      ["Desafio The Forge", "Corrida 5 km", "100 flexões", "200 agachamentos", "200 abdominais"]
+    ];
+
+    const grid = document.getElementById("trainingGrid");
+    const saved = JSON.parse(localStorage.getItem("forge_paulo_progress") || "{}");
+
+    workouts.forEach((items, i) => {
+      const day = i + 1;
+      const card = document.createElement("article");
+      card.className = "day";
+      card.innerHTML = `
+        <div class="day-head">
+          <div><span>Dia</span> <span class="day-number">${day}</span></div>
+          <input type="checkbox" id="day-${day}">
+        </div>
+        <div class="day-title">${day === 30 ? "Final Boss" : day === 29 ? "Simulado" : "Treino"}</div>
+        <ul>${items.map(item => `<li>${item}</li>`).join("")}</ul>
+      `;
+      grid.appendChild(card);
+
+      const check = card.querySelector("input");
+      check.checked = !!saved[day];
+      card.classList.toggle("done", check.checked);
+
+      check.addEventListener("change", () => {
+        saved[day] = check.checked;
+        if (!check.checked) delete saved[day];
+        localStorage.setItem("forge_paulo_progress", JSON.stringify(saved));
+        card.classList.toggle("done", check.checked);
+        updateProgress();
+      });
+    });
+
+    function updateProgress() {
+      const completed = document.querySelectorAll("input[type='checkbox']:checked").length;
+      document.getElementById("count").textContent = `${completed}/30 treinos concluídos`;
+      document.getElementById("bar").style.width = `${(completed / 30) * 100}%`;
+    }
+
+    function resetProgress() {
+      localStorage.removeItem("forge_paulo_progress");
+      document.querySelectorAll("input[type='checkbox']").forEach(c => c.checked = false);
+      document.querySelectorAll(".day").forEach(d => d.classList.remove("done"));
+      updateProgress();
+    }
+
+    updateProgress();
+  </script>
+</body>
+</html>
